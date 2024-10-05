@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        img {
+            display: block;
+            margin: 50px auto;
+            width: 80%; /* Adjust the width as needed */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Filtered Job Data</h1>
+
+    {% if data %}
+        <table>
+            <thead>
+                <tr>
+                    {% for col in data[0].keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        {% for value in row.values() %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Display the chart -->
+        <h2>Job Data Chart</h2>
+        <img src="{{ chart_path }}" alt="Job Data Chart">
+
+    {% else %}
+        <p>No data found for the selected Title and Location.</p>
+    {% endif %}
+
+    <a href="/">Go back</a>
+
+</body>
+</html>
